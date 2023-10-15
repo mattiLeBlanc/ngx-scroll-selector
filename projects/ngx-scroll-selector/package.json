@@ -1,9 +1,26 @@
 {
   "name": "ngx-scroll-selector",
-  "version": "0.0.1",
+  "version": "1.0.4",
+  "author": {
+    "name": "Mattijs Spierings",
+    "email": "mattijsspierings@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "scrollselect",
+    "scrollselector",
+    "scroll-select",
+    "scroll-selector",
+    "account-transfer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattiLeBlanc/ngx-scroll-selector.git"
+  },
   "peerDependencies": {
-    "@angular/common": "^16.2.0",
-    "@angular/core": "^16.2.0"
+    "@angular/common": ">=10.0.0",
+    "@angular/core": ">=10.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

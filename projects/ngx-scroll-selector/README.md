@@ -1,27 +1,56 @@
 # NgxScrollSelector
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+The Angular component allows you to select items from a scrolling list. This would be mainly used when you
+want to select an source and destination, for example transfering from one account to another.
 
-## Code scaffolding
+The `ngx-scroll-selector-column` can have a `left` and `right` attribute to mark its position.
+You can preselect a `ngx-scroll-selector-item` by providing `[select]='number'` (start counting from 0).
+To capture the selected item, you can setup a handler to listen to `(selected)`.
 
-Run `ng generate component component-name --project ngx-scroll-selector` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-scroll-selector`.
-> Note: Don't forget to add `--project ngx-scroll-selector` or else it will be added to the default project in your `angular.json` file.
+The **id** is mandatory in the `ngx-scroll-selector-item`, otherwise we can't exclude the selected account from the second column, or provide the id of the selected column.
 
-## Build
+## Transfer between accounts example
 
-Run `ng build ngx-scroll-selector` to build the project. The build artifacts will be stored in the `dist/` directory.
+Example usage with 2 columns
+```
+<div class="container">
+  <ngx-scroll-selector>
+    <!--
+    Set 'left' to make it the left column. [select] is optional to preselect a list item (start from 0).
+    (selected) allows you to capture the selected item
+  -->
+    <ngx-scroll-selector-column left [select]="1" (selected)="handleSelected($event)">
+      <ngx-scroll-selector-column-title>From</ngx-scroll-selector-column-title>
+      <ngx-scroll-selector-item *ngFor="let account of currentAccounts" [id]="account.id">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div class="title">{{ account.name }}</div>
+          <div class="title">{{ account.balance | currency }}</div>
+          <div class="sub-title" *ngIf="account.dateAvailable">Date available: {{ account.dateAvailable | date:
+            'shortDate' }}</div>
+        </div>
+      </ngx-scroll-selector-item>
+    </ngx-scroll-selector-column>
 
-Lint the project with: `ng lint ngx-scroll-selector`.
-For building in development mode use: `ng build ngx-scroll-selector  --configuration development`.
+    <!-- Replace content with mat-icon if you want -->
+    <ngx-scroll-selector-icon>=></ngx-scroll-selector-icon>
 
-## Publishing
+    <!--
+    Set 'right' to make it the right column. [select] is optional to preselect a list item (start from 0).
+    (selected) allows you to capture the selected item
+  -->
+    <ngx-scroll-selector-column right [select]="0" (selected)="handleSelected($event)">
+      <ngx-scroll-selector-column-title>To</ngx-scroll-selector-column-title>
+      <ngx-scroll-selector-item *ngFor="let account of availableAccounts" [id]="account.id">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <div class="title">{{ account.name }}</div>
+          <div class="title" *ngIf="account.rate">{{ account.rate }}</div>
+        </div>
+      </ngx-scroll-selector-item>
 
-After building your library with `ng build ngx-scroll-selector`, go to the dist folder `cd dist/ngx-scroll-selector` and run `npm publish`.
+    </ngx-scroll-selector-column>
 
-## Running unit tests
 
-Run `ng test ngx-scroll-selector` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  </ngx-scroll-selector>
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+</div>
+```
