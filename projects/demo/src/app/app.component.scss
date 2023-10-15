@@ -1,0 +1,44 @@
+:host {
+
+  // some helper css for the examples
+  [fxLayout="column"] {
+    display: flex;
+    flex-direction: column;
+  }
+  [fxLayoutAlign="center center"] {
+    display: flex;
+    place-content: center;
+    align-items: center;
+  }
+  .container {
+    max-width: 500px;
+  }
+  // end helper functions
+
+
+  ngx-scroll-selector {
+
+    ngx-scroll-selector-column-title {
+      padding: 8px;
+    }
+
+    ngx-scroll-selector-item {
+      .title {
+        font-size: 14px;
+      }
+      .sub-title {
+        font-size: 12px;
+      }
+      &.active {
+        .title {
+          font-weight: bold;
+        }
+      }
+      &:not(.active) {
+        .title {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
