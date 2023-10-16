@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subject, debounceTime, fromEvent, takeUntil, tap } from 'rxjs';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { Subject, fromEvent } from 'rxjs';
+
 
 export interface SelectedItem {
   id: string;
@@ -75,7 +77,7 @@ export class ScrollSelectorIconComponent implements OnInit {
     <ng-content select="ngx-scroll-selector-column-title"></ng-content>
     <div class="wrapper">
       <div class="list">
-        <div class="visor"></div>
+        <div class="visor" [ngStyle]="{ 'background-color': this.visorColor}"></div>
         <div class="spacer"></div>
         <ng-content></ng-content>
         <div class="spacer"></div>
@@ -91,6 +93,7 @@ export class ScrollSelectorColummComponent implements OnInit, OnDestroy, AfterVi
   }
   @Output() selected = new EventEmitter<SelectedItem>();
   @Input() select!: number;
+  @Input() visorColor!: string;
   @Input() left!: string;
   @Input() right!: string;
   private _columnPosition!: string;
@@ -128,14 +131,15 @@ export class ScrollSelectorColummComponent implements OnInit, OnDestroy, AfterVi
     });
     selectedItem.classList.add('active');
 
-    // correct for strange 0.5 offset in scroll position
-    const parentOffset = scrollSelectorElement.offsetTop + wrapper.offsetTop - 0.5;
+    let parentOffset = getParentOffset();
 
     fromEvent(list, 'scroll')
       .pipe(
         takeUntil(this.onDestroy),
         debounceTime(50),
         tap(() => {
+          // get parent ofset again in case something changed AfterViewInit
+          parentOffset = getParentOffset();
           // refresh items because the list may have been repainted
           items = list.querySelectorAll('ngx-scroll-selector-item');
           items.forEach(item => {
@@ -155,6 +159,11 @@ export class ScrollSelectorColummComponent implements OnInit, OnDestroy, AfterVi
         })
       )
       .subscribe();
+
+      function getParentOffset() {
+        // correct for strange 0.5 offset in scroll position
+        return scrollSelectorElement.offsetTop + wrapper.offsetTop - 0.5;
+      }
   }
 
   itemSelected(id: string) {

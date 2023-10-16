@@ -17,26 +17,31 @@
 
 
   ngx-scroll-selector {
+    background-color: #e9e9eb;
 
     ngx-scroll-selector-column-title {
       padding: 8px;
+      background-color: #f3f3f3;
     }
 
-    ngx-scroll-selector-item {
-      .title {
-        font-size: 14px;
-      }
-      .sub-title {
-        font-size: 12px;
-      }
-      &.active {
+    ngx-scroll-selector-column {
+
+      ngx-scroll-selector-item {
         .title {
-          font-weight: bold;
+          font-size: 14px;
         }
-      }
-      &:not(.active) {
-        .title {
+        .sub-title {
           font-size: 12px;
+        }
+        &.active {
+          .title {
+            font-weight: bold;
+          }
+        }
+        &:not(.active) {
+          .title {
+            font-size: 12px;
+          }
         }
       }
     }

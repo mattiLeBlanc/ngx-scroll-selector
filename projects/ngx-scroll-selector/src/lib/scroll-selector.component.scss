@@ -1,82 +1,75 @@
 :host {
-  // box-sizing: border-box;
-  // display: block;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  position: relative;
 
-  // .scroll-selector {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    background-color: #e9e9eb;
-    position: relative;
+  ::ng-deep {
+    ngx-scroll-selector-icon {
+      position: absolute;
+      left: 50%;
+      z-index: 10;
+      transform: translate3d(-50%, -50%, 0);
+    }
 
-    ::ng-deep {
-      ngx-scroll-selector-icon {
-        position: absolute;
-        left: 50%;
-        z-index: 10;
-        transform: translate3d(-50%, -50%, 0);
-      }
+    ngx-scroll-selector-column {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      flex-basis: 50%;
 
-      ngx-scroll-selector-column {
+      ngx-scroll-selector-column-title {
         box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        flex-basis: 50%;
-
-        ngx-scroll-selector-column-title {
+      }
+      .wrapper {
+        position: relative;
+        .list {
+          z-index: 0;
           box-sizing: border-box;
-          background-color: #f3f3f3;
-        }
-        .wrapper {
-          position: relative;
-          .list {
+          &::-webkit-scrollbar {
+            display: none;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          box-sizing: border-box;
+          grid-auto-flow: row;
+          overflow-y: scroll;
+          height: 300px;
+          scroll-snap-type: y mandatory;
+          display: grid;
+
+          .visor {
+            position: absolute;
+            box-sizing: border-box;
+            min-height: 100px;
+            height: 100px;
+            width: 100%;
+
+            top: 100px;
             z-index: 0;
-            box-sizing: border-box;
-            &::-webkit-scrollbar {
-              display: none;
-              -ms-overflow-style: none;
-              scrollbar-width: none;
-            }
-            box-sizing: border-box;
-            grid-auto-flow: row;
-            overflow-y: scroll;
-            height: 300px;
-            scroll-snap-type: y mandatory;
-            display: grid;
+          }
 
-            .visor {
-              position: absolute;
-              box-sizing: border-box;
-              min-height: 100px;
-              height: 100px;
-              width: 100%;
-              background-color: #f6f6f8;
-              top: 100px;
-              z-index: 0;
-            }
-
-            .spacer {
-              box-sizing: border-box;
-              scroll-snap-align: start;
-              min-height: 100px;
-              height: 100px;
-              white-space: nowrap;
-            }
+          .spacer {
+            box-sizing: border-box;
+            scroll-snap-align: start;
+            min-height: 100px;
+            height: 100px;
+            white-space: nowrap;
           }
         }
       }
-
-      // We have to use ng-deep for content projected list items
-      ::ng-deep ngx-scroll-selector-item,
-      ::ng-deep .item {
-        z-index: 10;
-        box-sizing: border-box;
-        min-height: 100px;
-        scroll-snap-align: start;
-        display: flex;
-        align-items: center;
-        place-content: center;
-      }
     }
-  // }
+
+    // We have to use ng-deep for content projected list items
+    ::ng-deep ngx-scroll-selector-item,
+    ::ng-deep .item {
+      z-index: 10;
+      box-sizing: border-box;
+      min-height: 100px;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      place-content: center;
+    }
+  }
 }

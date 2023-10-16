@@ -5,9 +5,9 @@ want to select an source and destination, for example transfering from one accou
 
 The `ngx-scroll-selector-column` can have a `left` and `right` attribute to mark its position.
 You can preselect a `ngx-scroll-selector-item` by providing `[select]='number'` (start counting from 0).
-To capture the selected item, you can setup a handler to listen to `(selected)`.
+To capture the selected item, you can setup a handler to listen to `(selected)`. `visorColor` allows you to adjust the bg of the middle row (selected row).
 
-The **id** is mandatory in the `ngx-scroll-selector-item`, otherwise we can't exclude the selected account from the second column, or provide the id of the selected column.
+The `id` is a mandatory property in the `ngx-scroll-selector-item`, otherwise we can't provide the id of the selected row.
 
 ## Transfer between accounts example
 
@@ -17,9 +17,9 @@ Example usage with 2 columns
   <ngx-scroll-selector>
     <!--
     Set 'left' to make it the left column. [select] is optional to preselect a list item (start from 0).
-    (selected) allows you to capture the selected item
+    (selected) allows you to capture the selected item. `visorColor` allows you to adjust the bg of the middle row (selected row).
   -->
-    <ngx-scroll-selector-column left [select]="1" (selected)="handleSelected($event)">
+    <ngx-scroll-selector-column left [select]="1" (selected)="handleSelected($event)" visorColor="#f6f6f8">
       <ngx-scroll-selector-column-title>From</ngx-scroll-selector-column-title>
       <ngx-scroll-selector-item *ngFor="let account of currentAccounts" [id]="account.id">
         <div fxLayout="column" fxLayoutAlign="center center">
@@ -36,9 +36,9 @@ Example usage with 2 columns
 
     <!--
     Set 'right' to make it the right column. [select] is optional to preselect a list item (start from 0).
-    (selected) allows you to capture the selected item
+    (selected) allows you to capture the selected item. `visorColor` allows you to adjust the bg of the middle row (selected row).
   -->
-    <ngx-scroll-selector-column right [select]="0" (selected)="handleSelected($event)">
+    <ngx-scroll-selector-column right [select]="0" (selected)="handleSelected($event)" visorColor="#f6f6f8">
       <ngx-scroll-selector-column-title>To</ngx-scroll-selector-column-title>
       <ngx-scroll-selector-item *ngFor="let account of availableAccounts" [id]="account.id">
         <div fxLayout="column" fxLayoutAlign="center center">

@@ -4,7 +4,7 @@
     Set 'left' to make it the left column. [select] is optional to preselect a list item (start from 0).
     (selected) allows you to capture the selected item
   -->
-    <ngx-scroll-selector-column left [select]="1" (selected)="handleSelected($event)">
+    <ngx-scroll-selector-column left [select]="1" (selected)="handleSelected($event)" visorColor="#f6f6f8">
       <ngx-scroll-selector-column-title>From</ngx-scroll-selector-column-title>
       <ngx-scroll-selector-item *ngFor="let account of currentAccounts" [id]="account.id">
         <div fxLayout="column" fxLayoutAlign="center center">
@@ -23,7 +23,7 @@
     Set 'right' to make it the right column. [select] is optional to preselect a list item (start from 0).
     (selected) allows you to capture the selected item
   -->
-    <ngx-scroll-selector-column right [select]="0" (selected)="handleSelected($event)">
+    <ngx-scroll-selector-column right [select]="0" (selected)="handleSelected($event)" visorColor="#f6f6f8">
       <ngx-scroll-selector-column-title>To</ngx-scroll-selector-column-title>
       <ngx-scroll-selector-item *ngFor="let account of availableAccounts" [id]="account.id">
         <div fxLayout="column" fxLayoutAlign="center center">
